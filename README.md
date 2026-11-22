@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PALATE
 
-## Getting Started
+Premium **chef-led fine dining** template — seasonal tasting menus, private dining salons, chef story, journal, and table enquiry. Built for Veltri / Criting marketplace quality: bone linen, graphite ink, oxblood wine, brass metal.
 
-First, run the development server:
+> **Demo content is fictional.** Menus, chef biography, rooms and journal notes are sample data for preview only. Reserve means enquiry — no live booking or payments.
+
+## Stack
+
+- Next.js 16 App Router · React 19 · TypeScript strict · Tailwind CSS v4
+- Motion for React (with `prefers-reduced-motion`)
+- Zod-validated enquiry forms (reserve / private / contact)
+- Typed local **ContentProvider** (`src/content/`) — **no CMS / Payload**
+- Static export for **Cloudflare Pages** (`output: "export"`)
+
+Future CMS: wire [Nextly](https://github.com/) (or your adapter) behind `ContentProvider` without rewriting UI.
+
+## Routes
+
+| Path | Purpose |
+|------|---------|
+| `/` | Homepage — hero, sticky courses, chef, private, journal, reserve CTA |
+| `/menu` · `/menu/[slug]` | Seasonal menus + course detail |
+| `/reserve` | Table enquiry (demo) |
+| `/private-dining` | Salons + enquiry |
+| `/chef` | Chef / kitchen principles |
+| `/journal` · `/journal/[slug]` | Service notes |
+| `/contact` | General enquiry |
+| `/privacy` · `/terms` | Legal stubs |
+| Custom 404 | Branded not-found |
+
+## Quick start
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```bash
+npm run typecheck
+npm run lint
+npm run build   # writes static site to out/
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Cloudflare Pages
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Build command: `npm run build`
+2. Output directory: `out`
+3. Framework preset: Next.js (static) / None
 
-## Learn More
+Or drag `out/` into Pages. No Node server required for the default static export.
 
-To learn more about Next.js, take a look at the following resources:
+## Content
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Edit typed files under `src/content/data/`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `site.ts` — name, nav, contact, enquiry options
+- `menus.ts` — seasonal tasting menus / courses
+- `private-dining.ts` — salon rooms
+- `chef.ts` — chef biography + principles
+- `journal.ts` — service notes
 
-## Deploy on Vercel
+Set `contact.endpoint` to enable real form POST (Formspree, Basin, or your API). Without it, forms stay in local demo mode.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Design
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See `DESIGN.md` for palette, type, motion, and craft boundaries. Distinct from BREW (specialty café) and Maison (hotel hospitality).
+
+## License
+
+Marketplace license per Veltri / Criting purchase terms.
